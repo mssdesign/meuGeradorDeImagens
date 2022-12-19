@@ -1,6 +1,8 @@
 function onSubmit(e) {
   e.preventDefault()
 
+  document.querySelector('#picture').src = ''
+
   const prompt = document.querySelector('.text').value
 
   if (prompt === '') {
@@ -12,6 +14,8 @@ function onSubmit(e) {
 }
 
 async function generateImageRequest(prompt) {
+    showLoading()
+
     try {
         const response = await fetch('/openai/generateimage', {
             method: 'POST',
@@ -24,14 +28,30 @@ async function generateImageRequest(prompt) {
         })
 
         if (!response.ok) {
+            removeLoading()
             throw new Error('A imagem não pôde ser gerada.')
         }
 
         const data = await response.json()
-        console.log(data)
+        //console.log(data.data)
+
+        const imageUrl = data.data
+
+        document.querySelector('#picture').src = imageUrl
+
+        removeLoading()
     } catch (error) {
-        document.querySelector('.image').textContent = error
+        removeLoading()
+        document.querySelector('.textImage').textContent = error
     }
+}
+
+function showLoading() {
+    document.querySelector('.textImage').textContent = 'Carregando...'
+}
+
+function removeLoading() {
+    document.querySelector('.textImage').textContent = ''
 }
 
 document.querySelector('.search').addEventListener('submit', onSubmit)

@@ -4,7 +4,7 @@
 }
 
 .prompt {
-    width: 500px;
+    width: 300px;
     height: 325px;
     background-color: #3da782;
     display: flex;
@@ -16,7 +16,7 @@
 
 .image {
     height: 256px;
-    width: 450px;
+    width: 256px;
     background-color: #ccc;
 }
 
@@ -41,7 +41,7 @@
 .text {
     border-radius: 5px;
     height: 30px;
-    width: 350px;
+    width: 150px;
     opacity: 0.5;
     border-color: #fff;
     cursor: pointer;
